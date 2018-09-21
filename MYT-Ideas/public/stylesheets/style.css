@@ -1,0 +1,16 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#mytimg {
+  height : 150;
+  width : 150;
+}
+
+.idea{
+  padding: 30px;
+}
