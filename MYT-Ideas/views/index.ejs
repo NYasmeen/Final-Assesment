@@ -16,35 +16,148 @@
 
 </head>
 
-<body class="row">
-  <div id="myt mx-4" class ="col-md-2">
-    <img id="mytimg" src=<%= myturl %> alt="My Take away">
-    <h1 class="mt-4">
-        <%= title %>
-      </h1>
-  </div>
+<body class="">
 
-  <div id="feature" class="col">
+        <h1>Node + Express + MongoDb example</h1>
+        <p id="counter">Loading button click data.</p>
+        <button id="myButton">Click me!</button>
+    
+
+
+
+  <nav class="navbar navbar-light bg-dark justify-content-between">
+    <a class="navbar-brand text-light">MYT-Ideas</a>
+    <form class="form-inline">
+      <button data-toggle="modal" data-target="#login" class="btn btn-outline-white my-2 my-sm-0 mx-2" type="button">Login</button>
+      <button data-toggle="modal" data-target="#Register" class="btn btn-outline-white my-2 my-sm-0" type="button">Register</button>
+
+
+    </form>
+  </nav>
+
+  <div class="row mt-4">
+    <div id="myt m-4" class="col-md-2">
+      <img id="mytimg" src=<%=myturl %> alt="My Take away">
+      <!-- <h1 class="mt-4">
+        <%= title %>
+      </h1> -->
+    </div>
+    <div id="feature" class="col">
       <% for(var i=0; i<l; i++){ %>
       <div class="idea">
-    <h1>
-      <%= JSON.stringify(Info[i].name) %>
-    </h1>
-    <p>
-      <%= JSON.stringify(Info[i].idea) %>
-    </p>
+        <h1>
+          <%= JSON.stringify(Info[i].name) %>
+        </h1>
+        <p>
+          <%= JSON.stringify(Info[i].idea) %>
+        </p>
+        <form action="/like" method="POST">
+          <% name = JSON.stringify(Info[i].name) %>
+          <div class="form-group">
+            
+             
+           <button type="submit" class="btn btn-success" >Thumbs up</button> :  <%= JSON.stringify(Info[i].like) %>
+               </div>
+        </form>
+
+      </div>
+
+      <% } %>
     </div>
-   
-  <% } %>
+
+    <!-- registeration -->
+
+    <div class="modal fade" id="Register" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div>
+            <h1 class="display-4">Registeration:</h1>
+            <hr>
+            <h3>Please fill in this form to create an account.</h3>
+          </div>
+          <div class="container text-center">
+            <form action="/" method="POST">
+              <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="Name" class="form-control" id="name" placeholder="Enter Name" name="name" pattern="[A-Za-z]+"
+                  required>
+              </div>
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" pattern="[a-z0-9._%+-].+@touch2success.com"
+                size="30" title="Restricted only to T2S User" required>
+
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"
+                  required>
+              </div>
+              <div class="form-group form-check">
+
+                <p>By creating an account you agree to our
+                  <a href="https://termsfeed.com/blog/privacy-policies-vs-terms-conditions/" style="color:dodgerblue">Terms
+                    & Privacy</a>.</p>
+                <div class="clearfix">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                  <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" type="button" class="btn btn-danger">Cancel</button> -->
+                  <button type="submit"  class="btn btn-success">Sign Up</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- registeration/ -->
+
+    <!-- login -->
+
+
+
+    <div class="container mt-3">
+      <div class="modal fade text-dark" id="login">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="container">
+                <h2>Please Login</h2>
+                <form action="/" method="POST">
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                  </div>
+                  <div class="form-group form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-success" onclick="storagefunc()">Submit</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-info">Register</button> -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login/ -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
   </div>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+  <script src="client.js"></script>
+
 </body>
 
 </html>
