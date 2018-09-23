@@ -1,4 +1,3 @@
-const fetch =  require('whatwg-fetch')
 console.log('Client-side code running');
 
 
@@ -6,7 +5,7 @@ const button = document.getElementById('myButton');
 button.addEventListener('click', function(e) {
   console.log('button was clicked');
 
-  fetch('/clicked', {method: 'POST'})
+  request('/clicked', {method: 'POST'})
     .then(function(response) {
       if(response.ok) {
         console.log('click was recorded');

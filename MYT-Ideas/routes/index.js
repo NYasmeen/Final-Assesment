@@ -34,14 +34,47 @@ router.get('/', (req, res, next ) => {
   
       dbo.collection("collection").insertOne(myobj, function(err, res) {
         if (err) throw err;
-        console.log("1 document inserted");
         db.close();
+
       });
     }
     });
       
     });
+    res.redirect('/home');
+
     })
+
+
+
+    router.post('/login', (req, res) => {
+      MongoClient.connect(url, function(err, db) {
+        let { email, password } = req.body;
+        if (err) throw err;
+        var dbo = db.db("user");
+
+console.log(req.body)
+
+        dbo.collection('collection').findOne({ email }, (err, result) => {
+          if (err) throw err;
+    if(result){
+      console.log(result.password)
+      if(result.password == password)
+      {
+        res.redirect('/home')
+
+      }else{
+        console.log("Invalid password")
+
+      }
+    }else{
+      console.log("Invalid user id ")
+       
+      }
+      });
+        
+      });
+      })
 
 
   
@@ -70,7 +103,7 @@ console.log("Hola" + id );
   
 
   router.post('/clicked', (req, res) => {
-    
+
     const click = {clickTime: new Date()};
     console.log(click);
     console.log(db);
