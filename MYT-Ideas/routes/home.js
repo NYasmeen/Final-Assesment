@@ -25,10 +25,8 @@ router.get('/', (req, res, next ) => {
 
     }else {
         res.redirect('/');
-
     }
-
-    })
+   })
 
 
 
