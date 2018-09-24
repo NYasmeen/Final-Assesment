@@ -19,10 +19,10 @@ var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/user";
 
+//session
 
-
-
-
+app.use(session({secret: 'ssshhhhh'}));
+var sess;
 
 
 
@@ -44,7 +44,16 @@ app.use('/users', usersRouter);
 
 
 app.get('/logout',function(req,res){
-  res.redirect('/');
+  req.session.destroy(function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.redirect('/');
+    }
+
+
+  });
+  
 });    
 
 

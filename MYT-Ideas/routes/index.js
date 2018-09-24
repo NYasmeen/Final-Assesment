@@ -4,6 +4,11 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/user";
 
 router.get('/', (req, res, next ) => {
+  sess=req.session;
+if(sess.email){
+  res.redirect('/home');
+
+}else{
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("user");
@@ -17,15 +22,19 @@ router.get('/', (req, res, next ) => {
       db.close();
     });
   });
+}
   })
 
   router.post('/', (req, res) => {
+    sess=req.session;
+
     MongoClient.connect(url, function(err, db) {
       let { name, email, password } = req.body;
       if (err) throw err;
       var dbo = db.db("user");
       var myobj = req.body;
-      
+      sess.email=req.body.email;
+
       dbo.collection('collection').findOne({ email }, (err, result) => {
         if (err) throw err;
   if(result){
@@ -48,12 +57,15 @@ router.get('/', (req, res, next ) => {
 
 
     router.post('/login', (req, res) => {
+      sess=req.session;
+console.log(sess)
       MongoClient.connect(url, function(err, db) {
         let { email, password } = req.body;
         if (err) throw err;
         var dbo = db.db("user");
 
 console.log(req.body)
+sess.email=req.body.email;
 
         dbo.collection('collection').findOne({ email }, (err, result) => {
           if (err) throw err;

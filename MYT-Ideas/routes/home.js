@@ -5,6 +5,10 @@ var url = "mongodb://localhost:27017/user";
 
 /* GET users listing. */
 router.get('/', (req, res, next ) => {
+    sess = req.session;
+
+    if(sess.email){
+
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("user");
@@ -18,7 +22,15 @@ router.get('/', (req, res, next ) => {
           db.close();
         });
       });
+
+    }else {
+        res.redirect('/');
+
+    }
+
     })
+
+
 
 
     
