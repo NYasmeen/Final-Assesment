@@ -35,33 +35,32 @@
     <div id="feature" class="col">
         <div class="idea">
 
-        <form class= action="/idea" method="POST">
+        <form action="/idea" method="POST">
           <div class="form-group ">
               <label for="idea">New Idea:</label>
-              <input type="text" class="form-control" id="idea" placeholder="Enter Idea" name="idea">
+              <input type="text" class="form-control" id="idea" placeholder="Enter Idea" name="idea" required>
             </div>
             <div>
             
           <button type='submit' class="btn btn-success " type="button">Post-Idea</button>
           </div>
          </form>
+
          </div>
       <% for(var i=0; i<l; i++){ %>
       <div class="idea">
-        <h1>
+        <h1 > 
           <%= JSON.stringify(Info[i].name) %>
         </h1>
         <p>
           <%= JSON.stringify(Info[i].idea) %>
         </p>
-        <form action="/like" method="POST">
-          <% name = JSON.stringify(Info[i].name) %>
+        <!-- <form action="/like" method="POST"> -->
           <div class="form-group">
-            
-             
-           <button type="submit" class="btn btn-success" >Thumbs up</button> :  <%= JSON.stringify(Info[i].like) %>
+                         
+           <button onclick="mybutton('<%= JSON.stringify(Info[i].idea) %>')"  class="btn btn-success" >Thumbs up</button> :  <%= JSON.stringify(Info[i].like) %>
                </div>
-        </form>
+        <!-- </form> -->
 
       </div>
 

@@ -49,14 +49,11 @@
         <p>
           <%= JSON.stringify(Info[i].idea) %>
         </p>
-        <form action="/like" method="POST">
-          <% name = JSON.stringify(Info[i].name) %>
           <div class="form-group">
             
              
-           <button type="submit" class="btn btn-success" >Thumbs up</button> :  <%= JSON.stringify(Info[i].like) %>
+           <button type="submit" onclick="href.location('/')" class="btn btn-success" >Thumbs up</button> :  <%= JSON.stringify(Info[i].like) %>
                </div>
-        </form>
 
       </div>
 
@@ -122,12 +119,12 @@
                 <h2>Please Login</h2>
                 <form action="/login" method="POST">
                   <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                    <label for="login-email">Email:</label>
+                    <input type="email" class="form-control" id="login-email" placeholder="Enter email" name="email">
                   </div>
                   <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
                   </div>
                   <div class="form-group form-check">
                     <label class="form-check-label">

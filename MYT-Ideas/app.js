@@ -21,7 +21,7 @@ var url = "mongodb://localhost:27017/user";
 
 //session
 
-app.use(session({secret: 'ssshhhhh'}));
+app.use(session({ secret: 'ssshhhhh' }));
 var sess;
 
 
@@ -43,9 +43,9 @@ app.use('/users', usersRouter);
 
 
 
-app.get('/logout',function(req,res){
-  req.session.destroy(function(err) {
-    if(err) {
+app.get('/logout', function (req, res) {
+  req.session.destroy(function (err) {
+    if (err) {
       console.log(err);
     } else {
       res.redirect('/');
@@ -53,40 +53,49 @@ app.get('/logout',function(req,res){
 
 
   });
-  
-});    
 
+});
 
 app.post('/idea', (req, res) => {
+  sess = req.session;
 
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     var dbo = db.db("user");
+    let email = sess.email;
     var myobj = req.body;
-    
+
+    console.log(email);
+
+    dbo.collection('collection').findOne({ email }, (err, result) => {
       if (err) throw err;
+      if (result) {
+        myobj.name = result.name;
+        myobj.like = 1;
+
+      }
 
 
-    dbo.collection("ideas").insertOne(myobj, function(err, res) {
-      if (err) throw err;
-      db.close();
+      console.log(typeof (myobj));
+      console.log(myobj);
+      dbo.collection("ideas").insertOne(myobj, function (err, res) {
+        if (err) throw err;
+        db.close();
+      });
 
     });
-  
-  
-    
   });
-  res.redirect('/home');
+  res.redirect('/');
+})
 
-  })
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
