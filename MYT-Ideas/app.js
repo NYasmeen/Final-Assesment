@@ -7,9 +7,11 @@ var session = require('express-session')
 
 
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 var homeRouter = require('./routes/home');
+var errorRouter = require('./routes/error');
+
 
 
 var app = express();
@@ -40,6 +42,7 @@ app.use('/', indexRouter);
 app.use('/home', homeRouter);
 
 app.use('/users', usersRouter);
+app.use('/error', errorRouter);
 
 
 
@@ -74,7 +77,6 @@ app.post('/idea', (req, res) => {
         myobj.like = 1;
 
       }
-
 
       console.log(typeof (myobj));
       console.log(myobj);

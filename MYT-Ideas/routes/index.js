@@ -79,10 +79,21 @@ sess.email=req.body.email;
 
       }else{
         console.log("Invalid password")
+        req.session.destroy(function (err) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect('/error');
+          }
+      
+      
+        });
 
       }
     }else{
       console.log("Invalid user id ")
+      res.redirect('/home')
+
        
       }
       });

@@ -10,9 +10,7 @@
     crossorigin="anonymous">
   <!-- CSS        -->
   <link rel="stylesheet" type="text/css" href='/stylesheets/style.css'>
-  <title>
-    <%= title %>
-  </title>
+
 
 </head>
 
@@ -32,32 +30,18 @@
   </nav>
 
   <div class="row mt-4">
-    <div id="myt m-4" class="col-md-2">
-      <img id="mytimg" src=<%=myturl %> alt="My Take away">
-      <!-- <h1 class="mt-4">
-        <%= title %>
-      </h1> -->
-    </div>
-    
+  
     <div id="feature" class="col container ">
-      <p>Please login/register to post an idea or to like an existing one.</p>
-      <% for(var i=0; i<l; i++){ %>
       <div class="idea rounded">
         <h1>
-          <%= JSON.stringify(Info[i].name) %>
-        </h1>
+ERROR:        </h1>
         <p>
-          <%= JSON.stringify(Info[i].idea) %>
-        </p>
-          <div class="form-group">
-            
-             
-           <button type="submit" onclick="href.location('/')" class="btn btn-success" >Thumbs up</button> :  <%= JSON.stringify(Info[i].like) %>
-               </div>
+            username or password are incorrect.
+Please check your credentials and try again.        </p>
+          
 
       </div>
 
-      <% } %>
     </div>
 
     <!-- registeration -->
